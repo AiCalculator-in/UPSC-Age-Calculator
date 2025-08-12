@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free UPSC Age Calculator to check your age eligibility for Civil Services Examination. Calculate attempts based on category, PwD, Ex-Serviceman status and more.">
+    <meta name="keywords" content="UPSC calculator, UPSC age eligibility, Civil Services exam, IAS, IPS, IFS, UPSC attempts, age limit calculator">
+    <meta name="author" content="AI Calculator">
+    <title>UPSC Age Calculator - Check Your Civil Services Exam Age Eligibility</title>
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="UPSC Age Calculator - Check Your Civil Services Exam Age Eligibility">
+    <meta property="og:description" content="Calculate your UPSC Civil Services exam eligibility based on age, category, and special provisions. Free tool for UPSC aspirants.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://aicalculator.in/">
+    
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: white;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+        
+        /* Calculator Widget Styles */
+        .upsc-widget {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+            transition: transform 0.3s ease;
+        }
+        
+        .upsc-widget:hover {
+            transform: translateY(-5px);
+        }
+        
+        .widget-title {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #34495e;
+        }
+        
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e1e8ed;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        /* Special Options Section */
+        .special-options {
+            margin: 25px 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%);
+            border-radius: 10px;
+            border: 1px solid #d0e7ff;
+        }
+        
+        .special-options h4 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        
+        .form-check {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .form-check-input {
+            width: auto;
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+        
+        .form-check-label {
+            margin: 0;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        
+        .calculate-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+        
+        .calculate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+        
+        .calculate-btn:active {
+            transform: translateY(0);
+        }
+        
+        /* Content Sections */
+        .content-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .content-section h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+        
+        .content-section h3 {
+            color: #34495e;
+            margin: 25px 0 15px 0;
+            font-size: 1.3rem;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        .content-section ul,
+        .content-section ol {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .content-section li {
+            margin-bottom: 8px;
+        }
+        
+        /* Category Tags */
+        .category-tag {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            color: white;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-right: 5px;
+        }
+        
+        .tag-general { background: #34495e; }
+        .tag-obc { background: #f39c12; }
+        .tag-scst { background: #9b59b6; }
+        .tag-ews { background: #27ae60; }
+        .tag-pwd { background: #e74c3c; }
+        
+        /* Age Limits Table */
+        .age-limits-table {
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+        
+        .age-limits-table table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        
+        .age-limits-table th,
+        .age-limits-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #e1e8ed;
+        }
+        
+        .age-limits-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-weight: 600;
+        }
+        
+        .age-limits-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        .age-limits-table tr:hover {
+            background: #e3f2fd;
+        }
+        
+        /* FAQ Section */
+        .faq-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .faq-item {
+            border-bottom: 1px solid #eee;
+            margin-bottom: 20px;
+        }
+        
+        .faq-question {
+            background: none;
+            border: none;
+            width: 100%;
+            padding: 15px 0;
+            text-align: left;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2c3e50;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .faq-question:hover {
+            color: #667eea;
+        }
+        
+        .faq-answer {
+            padding: 0 0 15px 0;
+            color: #555;
+            line-height: 1.6;
+            display: none;
+        }
+        
+        .faq-answer.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .faq-icon {
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-icon.active {
+            transform: rotate(180deg);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* Internal Links */
+        .internal-link {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .internal-link:hover {
+            text-decoration: underline;
+        }
+        
+        /* Highlight Box */
+        .highlight-box {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+            border: 1px solid #f39c12;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        
+        .highlight-box strong {
+            color: #d68910;
+        }
+        
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .upsc-widget,
+            .content-section,
+            .faq-section {
+                padding: 20px;
+            }
+            
+            .widget-title {
+                font-size: 1.5rem;
+            }
+            
+            .content-section h2 {
+                font-size: 1.5rem;
+            }
+            
+            .age-limits-table th,
+            .age-limits-table td {
+                padding: 8px 10px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .upsc-widget,
+            .content-section,
+            .faq-section {
+                padding: 15px;
+            }
+            
+            .age-limits-table {
+                font-size: 0.85rem;
+            }
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            color: white;
+            padding: 20px;
+            margin-top: 40px;
+        }
+        
+        footer a {
+            color: white;
+            text-decoration: none;
+        }
+        
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <header>
+            <h1>UPSC Age Calculator</h1>
+            <p class="subtitle">Check your age eligibility for Civil Services Examination and calculate remaining attempts</p>
+        </header>
+
+        <!-- Calculator Widget -->
+        <section class="upsc-widget" aria-labelledby="widget-title">
+            <h2 id="widget-title" class="widget-title">Check Your UPSC Eligibility</h2>
+            
+            <form id="upscForm" novalidate>
+                <div class="form-group">
+                    <label for="dob">Your Date of Birth:</label>
+                    <input type="date" id="dob" name="dob" required aria-required="true">
+                </div>
+
+                <div class="form-group">
+                    <label for="category">Category:</label>
+                    <select id="category" name="category" required aria-required="true">
+                        <option value="">Select Category</option>
+                        <option value="general">General</option>
+                        <option value="ews">EWS (Economically Weaker Section)</option>
+                        <option value="obc">OBC (Other Backward Class)</option>
+                        <option value="scst">SC/ST (Scheduled Caste/Tribe)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="gender">Gender:</label>
+                    <select id="gender" name="gender" required aria-required="true">
+                        <option value="">Select Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="transgender">Transgender</option>
+                    </select>
+                </div>
+
+                <div class="special-options">
+                    <h4>Special Provisions (if applicable):</h4>
+                    <div class="form-check">
+                        <input type="checkbox" id="exserviceman" name="exserviceman" class="form-check-input">
+                        <label for="exserviceman" class="form-check-label">Ex-Serviceman</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" id="pwd" name="pwd" class="form-check-input">
+                        <label for="pwd" class="form-check-label">Person with Disability (PwD)</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" id="jkresident" name="jkresident" class="form-check-input">
+                        <label for="jkresident" class="form-check-label">J&K Resident (1980-2001)</label>
+                    </div>
+                </div>
+
+                <button type="submit" class="calculate-btn">Check Eligibility & Calculate Age</button>
+            </form>
+        </section>
+
+        <!-- About UPSC Section -->
+        <section class="content-section">
+            <h2>What is UPSC Civil Services Examination?</h2>
+            <p>The <strong>Union Public Service Commission (UPSC)</strong> Civil Services Examination is India's most prestigious competitive exam for recruitment to various central government services. Often called the "Mother of all Exams," it selects candidates for coveted positions like IAS, IPS, IFS, and other Group A and Group B services.</p>
+            
+            <p>The exam is conducted annually in three stages: Preliminary Examination (Prelims), Main Examination (Mains), and Personality Test (Interview). Age eligibility plays a crucial role in determining your chances of success, as it directly impacts the number of attempts you can make.</p>
+
+            <h3>Why is Age Eligibility Critical for UPSC?</h3>
+            <p>Unlike many other competitive exams, UPSC has both age limits and attempt limits that vary by category. Understanding your exact eligibility helps you:</p>
+            <ul>
+                <li><strong>Plan Your Preparation:</strong> Know exactly how much time you have</li>
+                <li><strong>Strategize Attempts:</strong> Decide when to start appearing for the exam</li>
+                <li><strong>Avoid Disappointment:</strong> Prevent last-minute eligibility surprises</li>
+                <li><strong>Optimize Resources:</strong> Focus energy on the attempts that matter most</li>
+            </ul>
+
+            <div class="highlight-box">
+                <strong>Important:</strong> Age is calculated as on August 1st of the examination year. This is a fixed cutoff date used by UPSC for all candidates.
+            </div>
+        </section>
+
+        <!-- Age Limits and Attempts Section -->
+        <section class="content-section">
+            <h2>UPSC Age Limits and Maximum Attempts by Category</h2>
+            
+            <div class="age-limits-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Upper Age Limit</th>
+                            <th>Maximum Attempts</th>
+                            <th>Age Relaxation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="category-tag tag-general">General</span> General</td>
+                            <td>32 years</td>
+                            <td>6 attempts</td>
+                            <td>None</td>
+                        </tr>
+                        <tr>
+                            <td><span class="category-tag tag-ews">EWS</span> EWS</td>
+                            <td>32 years</td>
+                            <td>6 attempts</td>
+                            <td>None</td>
+                        </tr>
+                        <tr>
+                            <td><span class="category-tag tag-obc">OBC</span> OBC</td>
+                            <td>35 years</td>
+                            <td>9 attempts</td>
+                            <td>+3 years</td>
+                        </tr>
+                        <tr>
+                            <td><span class="category-tag tag-scst">SC/ST</span> SC/ST</td>
+                            <td>37 years</td>
+                            <td>Unlimited</td>
+                            <td>+5 years</td>
+                        </tr>
+                        <tr>
+                            <td><span class="category-tag tag-pwd">PwD</span> Person with Disability</td>
+                            <td>42 years*</td>
+                            <td>9 attempts</td>
+                            <td>+10 years</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p><small>*PwD relaxation is applied on top of the candidate's category relaxation</small></p>
+
+            <h3>Additional Age Relaxations</h3>
+            <ul>
+                <li><strong>Ex-Serviceman:</strong> Additional 5 years relaxation (maximum up to 37 years)</li>
+                <li><strong>J&K Residents (1980-2001):</strong> Additional 2 years relaxation</li>
+                <li><strong>Female/Transgender:</strong> Additional 2 years relaxation for certain categories</li>
+                <li><strong>Differently Abled:</strong> 10 years relaxation across all categories</li>
+            </ul>
+
+            <div class="highlight-box">
+                <strong>Note:</strong> These relaxations can be cumulative in some cases. Our <a href="https://aicalculator.in/upsc-age-calculator/" class="internal-link">UPSC Age Calculator</a> automatically applies all applicable relaxations for accurate results.
+            </div>
+        </section>
+
+        <!-- How Calculator Works -->
+        <section class="content-section">
+            <h2>How Does Our UPSC Age Calculator Work?</h2>
+            <p>Our comprehensive <a href="https://aicalculator.in/upsc-age-calculator/" class="internal-link">UPSC Age Calculator</a> uses the official UPSC guidelines to provide accurate eligibility assessment. Here's the step-by-step process:</p>
+
+            <h3>Calculation Methodology:</h3>
+            <ol>
+                <li><strong>Age Calculation:</strong> Your exact age is calculated as on August 1st of the examination year (UPSC's official cutoff date)</li>
+                <li><strong>Category Analysis:</strong> Base age limits and attempts are determined based on your selected category</li>
+                <li><strong>Special Provisions:</strong> All applicable relaxations are automatically added:
+                    <ul>
+                        <li>Ex-Serviceman status</li>
+                        <li>Person with Disability (PwD)</li>
+                        <li>J&K Resident provisions</li>
+                        <li>Gender-based relaxations</li>
+                    </ul>
+                </li>
+                <li><strong>Final Assessment:</strong> The tool determines your eligibility and calculates remaining attempts</li>
+                <li><strong>Future Projections:</strong> Shows your eligibility status for upcoming UPSC cycles</li>
+            </ol>
+
+            <h3>Benefits of Using Our Calculator:</h3>
+            <ul>
+                <li><strong>100% Accurate:</strong> Based on latest UPSC guidelines and notifications</li>
+                <li><strong>Comprehensive:</strong> Considers all categories and special provisions</li>
+                <li><strong>Instant Results:</strong> Get immediate eligibility status</li>
+                <li><strong>Future Planning:</strong> See your eligibility for upcoming years</li>
+                <li><strong>Mobile Friendly:</strong> Use on any device, anywhere</li>
+                <li><strong>Free to Use:</strong> No hidden charges or registration required</li>
+            </ul>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq-section">
+            <h2>Frequently Asked Questions (FAQ)</h2>
+
+            <div class="faq-item">
+                <button class="faq-question" type="button" aria-expanded="false">
+                    What is the maximum age limit for UPSC Civil Services?
+                    <span class="faq-icon">▼</span>
+                </button>
+                <div class="faq-answer">
+                    <p>The maximum age limit varies by category: General/EWS candidates - 32 years, OBC candidates - 35 years, SC/ST candidates - 37 years. Additional relaxations apply for PwD (10 years), Ex-Serviceman (5 years), and other special categories. Age is calculated as on August 1st of the examination year.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" type="button" aria-expanded="false">
+                    How many times can I attempt UPSC Civil Services exam?
+                    <span class="faq-icon">▼</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Maximum attempts depend on your category: General/EWS - 6 attempts, OBC - 9 attempts, SC/ST - Unlimited attempts (until age limit), PwD - 9 attempts. These limits apply as long as you remain within the age eligibility criteria.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" type="button" aria-expanded="false">
+                    Can I get age relaxation if I'm from multiple categories?
+                    <span class="faq-icon">▼</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Yes, in many cases relaxations are cumulative. For example, if you're OBC + PwD, you get 3 years (OBC) + 10 years (PwD) = 13 years total relaxation. Our <a href="https://aicalculator.in/upsc-age-calculator/" class="internal-link">calculator</a> automatically computes all applicable relaxations for accurate results.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" type="button" aria-expanded="false">
+                    What happens if I exceed the age limit by a few days?
+                    <span class="faq-icon">▼</span>
+                </button>
+                <div class="faq-answer">
+                    <p>UPSC age limits are strictly enforced. Even exceeding by a single day makes you ineligible for that examination cycle. This is why it's crucial to calculate your exact age as on August 1st using our precise calculator before applying.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" type="button" aria-expanded="false">
+                    Is there any age relaxation for female candidates?
+                    <span class="faq-icon">▼</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Currently, there is no general age relaxation specifically for female candidates in UPSC Civil Services. However, female candidates who belong to reserved categories (OBC, SC/ST) or special categories (PwD, Ex-Serviceman) get the same relaxations as their male counterparts in those categories.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" type="button" aria-expanded="false">
+                    How accurate is this UPSC age calculator?
+                    <span class="faq-icon">▼</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Our calculator is highly accurate as it follows the exact methodology used by UPSC - calculating age as on August 1st of the examination year and applying all official relaxations. However, we recommend verifying with the latest UPSC notification before final application, as rules may occasionally change.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" type="button" aria-expanded="false">
+                    What if I clear the exam in my last attempt?
+                    <span class="faq-icon">▼</span>
+                </button>
+                <div class="faq-answer">
+                    <p>If you clear the UPSC Civil Services exam in your last eligible attempt, you're still selected and can join the service. The attempt limit only affects your eligibility to appear for future exams, not your selection if you succeed within the allowed attempts.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <section class="content-section">
+            <h2>Ready to Check Your UPSC Age Eligibility?</h2>
+            <p>Don't let age-related confusion derail your civil services dream. Our advanced UPSC Age Calculator provides:</p>
+            <ul>
+                <li>Precise age calculation as per UPSC standards (August 1st cutoff)</li>
+                <li>Automatic application of all eligible relaxations</li>
+                <li>Clear breakdown of remaining attempts</li>
+                <li>Multi-year eligibility projection</li>
+                <li>Category-wise detailed analysis</li>
+            </ul>
+            <p>Visit our comprehensive <a href="https://aicalculator.in/upsc-age-calculator/" class="internal-link">UPSC Age Calculator</a> for detailed results and start planning your UPSC preparation strategy with confidence.</p>
+            
+            <div class="highlight-box">
+                <strong>Pro Tip:</strong> Use the calculator annually to track your eligibility status and plan your attempts strategically. Remember, timing your attempts correctly can make the difference between success and running out of chances!
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 AI Calculator. Empowering UPSC aspirants with accurate age calculations. 
+        <a href="https://aicalculator.in/">Visit our main website</a> for more calculators.</p>
+    </footer>
+
+    <script>
+        // FAQ Accordion functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', function() {
+                    const answer = this.nextElementSibling;
+                    const icon = this.querySelector('.faq-icon');
+                    const isActive = answer.classList.contains('active');
+                    
+                    // Close all other FAQ items
+                    document.querySelectorAll('.faq-answer').forEach(ans => {
+                        ans.classList.remove('active');
+                    });
+                    document.querySelectorAll('.faq-icon').forEach(ico => {
+                        ico.classList.remove('active');
+                    });
+                    document.querySelectorAll('.faq-question').forEach(q => {
+                        q.setAttribute('aria-expanded', 'false');
+                    });
+                    
+                    // Toggle current item
+                    if (!isActive) {
+                        answer.classList.add('active');
+                        icon.classList.add('active');
+                        this.setAttribute('aria-expanded', 'true');
+                    }
+                });
+            });
+            
+            // Form submission handler
+            const form = document.getElementById('upscForm');
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form values
+                const dob = document.getElementById('dob').value;
+                const category = document.getElementById('category').value;
+                const gender = document.getElementById('gender').value;
+                const isExServiceman = document.getElementById('exserviceman').checked;
+                const isPwd = document.getElementById('pwd').checked;
+                const isJkResident = document.getElementById('jkresident').checked;
+                
+                // Validate form
+                if (!dob || !category || !gender) {
+                    alert('Please fill in all required fields before proceeding.');
+                    return;
+                }
+                
+                // Validate date of birth (must be reasonable for UPSC eligibility)
+                const dobDate = new Date(dob);
+                const currentDate = new Date();
+                const age = (currentDate - dobDate) / (1000 * 60 * 60 * 24 * 365.25);
+                
+                if (age < 18) {
+                    alert('You must be at least 18 years old to be eligible for UPSC Civil Services exam.');
+                    return;
+                }
+                
+                if (age > 50) {
+                    alert('You may have exceeded the maximum age limit for UPSC exam. Please check the eligibility criteria.');
+                    return;
+                }
+                
+                // Show loading state
+                const button = document.querySelector('.calculate-btn');
+                const originalText = button.textContent;
+                button.textContent = 'Calculating...';
+                button.disabled = true;
+                
+                // Simulate processing time and redirect
+                setTimeout(() => {
+                    // Store form data in sessionStorage for the target page (if needed)
+                    sessionStorage.setItem('upscFormData', JSON.stringify({
+                        dob: dob,
+                        category: category,
+                        gender: gender,
+                        exServiceman: isExServiceman,
+                        pwd: isPwd,
+                        jkResident: isJkResident,
+                        submittedAt: new Date().toISOString()
+                    }));
+                    
+                    // Redirect to the calculator page
+                    window.location.href = 'https://aicalculator.in/upsc-age-calculator/';
+                }, 1000);
+            });
+            
+            // Set reasonable date limits for date input
+            const dobInput = document.getElementById('dob');
+            const today = new Date();
+            const maxDate = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
+            const minDate = new Date(today.getFullYear() - 50, today.getMonth(), today.getDate());
+            
+            dobInput.max = maxDate.toISOString().split('T')[0];
+            dobInput.min = minDate.toISOString().split('T')[0];
+            
+            // Add smooth scrolling for internal links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+            
+            // Form validation enhancements
+            const inputs = document.querySelectorAll('input[required], select[required]');
+            inputs.forEach(input => {
+                input.addEventListener('blur', function() {
+                    if (this.value.trim() === '') {
+                        this.style.borderColor = '#e74c3c';
+                    } else {
+                        this.style.borderColor = '#2ecc71';
+                    }
+                });
+                
+                input.addEventListener('input', function() {
+                    if (this.value.trim() !== '') {
+                        this.style.borderColor = '#2ecc71';
+                    }
+                });
+            });
+            
+            // Special provisions logic
+            const categorySelect = document.getElementById('category');
+            const pwdCheckbox = document.getElementById('pwd');
+            const exServicemanCheckbox = document.getElementById('exserviceman');
+            
+            // Update form based on category selection
+            categorySelect.addEventListener('change', function() {
+                // You can add category-specific logic here if needed
+                // For example, showing/hiding certain options based on category
+            });
+            
+            // Provide helpful tooltips or information
+            pwdCheckbox.addEventListener('change', function() {
+                if (this.checked) {
+                    // Could show additional info about PwD benefits
+                }
+            });
+            
+            exServicemanCheckbox.addEventListener('change', function() {
+                if (this.checked) {
+                    // Could show additional info about Ex-Serviceman benefits
+                }
+            });
+        });
+        
+        // Performance optimization: Lazy loading for non-critical elements
+        if ('IntersectionObserver' in window) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            });
+            
+            // Observe content sections for animation
+            document.querySelectorAll('.content-section, .faq-section').forEach(section => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(20px)';
+                section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(section);
+            });
+        }
+        
+        // Add keyboard navigation support for accessibility
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                const focusedElement = document.activeElement;
+                if (focusedElement.classList.contains('faq-question')) {
+                    focusedElement.click();
+                }
+            }
+        });
+        
+        // Error handling for form submission
+        window.addEventListener('beforeunload', function(e) {
+            const form = document.getElementById('upscForm');
+            const button = document.querySelector('.calculate-btn');
+            
+            if (button.disabled && button.textContent === 'Calculating...') {
+                e.preventDefault();
+                e.returnValue = 'Your form is being processed. Are you sure you want to leave?';
+                return e.returnValue;
+            }
+        });
+    </script>
+</body>
+</html>
