@@ -865,17 +865,8 @@
             }
         });
         
-        // Error handling for form submission
-        window.addEventListener('beforeunload', function(e) {
-            const form = document.getElementById('upscForm');
-            const button = document.querySelector('.calculate-btn');
-            
-            if (button.disabled && button.textContent === 'Calculating...') {
-                e.preventDefault();
-                e.returnValue = 'Your form is being processed. Are you sure you want to leave?';
-                return e.returnValue;
-            }
-        });
+        // Smooth redirect without any popup warnings
+        // Removed beforeunload event listener to prevent popup messages
     </script>
 </body>
 </html>
